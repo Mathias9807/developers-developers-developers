@@ -1,0 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400);
+html {box-sizing: border-box; font-size: 1em; font-family: Lato; font-weight: 400;}
+*, *:before, *:after {box-sizing: inherit;}
+.flex-container {display: flex;
+	.box {height: 200px; line-height:178px; vertical-align: middle; text-align: center; background-color: #eee ; width: 500px; margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 2px;
+		&:last-child {opacity: 0.5;}
+	}
+}

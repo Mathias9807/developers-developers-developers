@@ -1,0 +1,35 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400);
+/* line 2, ../sass/screen.scss */
+html {
+  box-sizing: border-box;
+  font-size: 1em;
+  font-family: Lato;
+  font-weight: 400;
+}
+
+/* line 3, ../sass/screen.scss */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* line 4, ../sass/screen.scss */
+.flex-container {
+  display: flex;
+}
+/* line 5, ../sass/screen.scss */
+.flex-container .box {
+  height: 200px;
+  line-height: 178px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #eee;
+  width: 500px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+/* line 6, ../sass/screen.scss */
+.flex-container .box:last-child {
+  opacity: 0.5;
+}
