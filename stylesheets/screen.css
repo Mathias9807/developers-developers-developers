@@ -29,7 +29,26 @@ html {
   border: 1px solid #ccc;
   border-radius: 2px;
 }
+
+.flex-container .panel {
+  height: auto;
+  line-height: 3em;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #eee;
+  width: 500px;
+  margin: 10px;
+  padding: 10px;
+  padding-top: 0;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.panel h3 {
+	padding: 0;
+	border: 0;
+}
 /* line 6, ../sass/screen.scss */
-.flex-container .box:last-child {
+#target {
   opacity: 0.5;
 }
