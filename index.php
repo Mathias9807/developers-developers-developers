@@ -21,7 +21,9 @@
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
 
-		if (array_key_exists('register', $_GET)) {
+		$loggedIn = false;
+
+		if (array_key_exists('register', $_GET) && array_key_exists('name', $_POST) && array_key_exists('pass', $_POST)) {
 			// Get username and hashed password
 			$name = $_POST['name'];
 			$pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
@@ -35,46 +37,56 @@
 					SQLite3::escapeString($name) .
 					'\';'
 				);
+
 				if ($exists->fetchArray()) {
-					echo "<div style=\"color: #F00; text-align: center;\">The name '" . htmlspecialchars($name) . "' is already taken!</div>";
+					echo "<div class=\"warning\">The name '" . htmlspecialchars($name) . "' is already taken!</div>";
 				}else {
 					// Else, add user to database
 					$query = 'INSERT INTO USERS (NAME, PASS) VALUES (\'' . 
 						SQLite3::escapeString($name) . '\', \'' . 
 						SQLite3::escapeString($pass) . '\');';
 
-					// Print query first (to aid debugging)
-					echo htmlspecialchars($query);
 					$db->query($query);
+
+					$loggedIn = true;
+				}
+			}else {
+				echo 'Connection to database failed!\n';
+			}
+		}else if (array_key_exists('login', $_GET) && array_key_exists('name', $_POST) && array_key_exists('pass', $_POST)) {
+			$name = $_POST['name'];
+			$pass = $_POST['pass'];
+
+			$db = new SQLite3('database.sqlite', SQLITE3_OPEN_READWRITE);
+
+			if ($db) {
+				$query = $db->query('SELECT * FROM USERS WHERE NAME = \'' .
+					SQLite3::escapeString($name) . '\';');
+	
+				if ($user = $query->fetchArray()) {
+					if (password_verify($pass, $user['PASS'])) {
+						$loggedIn = true;
+					}else {
+						echo '<div class="warning">Invalid username or password</div>';
+					}
+				}else { // No user with that name exists
+					echo '<div class="warning">Invalid username or password</div>';
 				}
 			}else {
 				echo 'Connection to database failed!\n';
 			}
 		}
+
+		if ($loggedIn) {
+			echo '<div class="info">' .
+				'<form action="index.php" method="get">' .
+				'You are logged in as \'' . 
+				$name . '\' ' . 
+				'<input type="submit" value="Log out" />' .
+				'</form></div>';
+		}else {
+			echo file_get_contents('login.html');
+		}
 	?>
-
-	<div class="flex-container">
-		<div class="panel">
-		<form method="post" action="index.php?login">
-			<h3>Login</h3>
-			<input name="name" type="text" placeholder="Username"></input>
-			<br>
-			<input name="pass" type="password" placeholder="Password"></input>
-			<br>
-			<input type="submit" value="Login"></input>
-		</form>
-		</div>
-
-		<div class="panel">
-		<form method="post" action="index.php?register">
-			<h3>Register</h3>
-			<input name="name" type="text" placeholder="Username"></input>
-			<br>
-			<input name="pass" type="password" placeholder="Password"></input>
-			<br>
-			<input type="submit" value="Register"></input>
-		</form>
-		</div>
-	</div>
 </body>
 </html>

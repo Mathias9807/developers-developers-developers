@@ -2,7 +2,11 @@
 html {box-sizing: border-box; font-size: 1em; font-family: Lato; font-weight: 400;}
 *, *:before, *:after {box-sizing: inherit;}
 .flex-container {display: flex;
-	.box {height: 200px; line-height:178px; vertical-align: middle; text-align: center; background-color: #eee ; width: 500px; margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 2px;
-		&:last-child {opacity: 0.5;}
+	.box {height: 200px; line-height:178px; vertical-align: middle; text-align: center; background-color: #eee ; width: 500px; margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 2px;}
+	.panel {height: auto; line-height:3em; vertical-align: middle; text-align: center; background-color: #eee ; width: 500px; margin: 20px; padding: 10px; padding-top: 0; border: 1px solid #ccc; border-radius: 2px;
 	}
 }
+#target {opacity: 0.5;}
+.panel h3 {line-height: 1em; padding: 0; border: 0;}
+.warning {color: #F00; text-align: center;}
+.info {height: auto; line-height: 3em; vertical-align: middle; text-align: center; background-color: #eee; width: auto; margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 2px;}
