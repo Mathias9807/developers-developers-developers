@@ -5,6 +5,9 @@ import cgi
 import cgitb
 cgitb.enable()
 
+# Print response header, mind the newline
+print("Content-type: text/plain\n")
+
 def createProduct(name, price, text1, text2):
     now = int(time.time())
     product = {
@@ -20,20 +23,25 @@ def createProduct(name, price, text1, text2):
     }
     return product
 
-products = [
-    createProduct("Bosch Diskmaskin", 50.90, "En riktigt fin diskmaskin", "Bosch, designing good life"), 
-    createProduct("Samsung Galaxy SII", 2222, "Samsungs flagskepp", "Samsung")
-]
+f = open('products.json', 'r')
+products = json.loads(f.read())
 
 try:
     form = cgi.FieldStorage()
-    
-    # Print response header, mind the newline
-    print("Content-type: text/json\n")
     
     query = form['query'].value
 
     if query == 'listProducts':
         print(json.dumps(products))
+
+    if query == 'addProduct':
+        products.append(json.loads(form['p'].value))
+        open('products.json', 'w').write(json.dumps(products, indent=4))
+
+        print(json.dumps(products))
+
+    open('out', 'a').write(form['query'].value)
+
 except Exception as e:
     print(str(e))
+

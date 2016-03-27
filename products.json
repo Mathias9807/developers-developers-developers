@@ -1,0 +1,42 @@
+[
+    {
+        "PRODUCT": {
+            "TEXTVAL1": "En riktigt fin diskmaskin",
+            "TEXTVAL2": "Bosch, designing good life",
+            "NAME": "Bosch Diskmaskin",
+            "PRICE": 50.9
+        },
+        "META": {
+            "LASTUPDATED": 1459064398,
+            "CREATED": 1459064398
+        }
+    },
+    {
+        "PRODUCT": {
+            "TEXTVAL1": "Samsungs flagskepp",
+            "TEXTVAL2": "Samsung",
+            "NAME": "Samsung Galaxy SII",
+            "PRICE": 2222
+        },
+        "META": {
+            "LASTUPDATED": 1459064398,
+            "CREATED": 1459064398
+        }
+    },
+    {
+        "PRODUCT": {
+            "TEXTVAL1": "A phone",
+            "TEXTVAL2": "Apple",
+            "NAME": "iPhone",
+            "PRICE": "6000"
+        }
+    },
+    {
+        "PRODUCT": {
+            "TEXTVAL1": "En b\u00f6jd smartphone",
+            "TEXTVAL2": "LG",
+            "NAME": "G Flex 2",
+            "PRICE": "2549.90"
+        }
+    }
+]

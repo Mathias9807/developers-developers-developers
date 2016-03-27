@@ -105,10 +105,12 @@
 		}else {
 			echo file_get_contents('login.html');
 		}
+
+		echo file_get_contents('newProduct.html');
 	?>
 
 	<div id="list" class="flex-container">
-		<table id="productTable">
+		<table class="panel">
 			<tr>
 				<th colspan="4" class="label">Products</th>
 			</tr>
@@ -118,20 +120,9 @@
 				<th>Maker</th>
 				<th>Price</th>
 			</tr>
-		</table>
-	</div>
-
-	<div class="flex-container">
-		<table class="panel">
-			<tr colspan="5"><h3>Add a new product</h3></tr>
-	
-			<tr>
-				<td><input type="text" placeholder="Name" required></td>
-				<td><input type="text" placeholder="Description" required></td>
-				<td><input type="text" placeholder="Maker" required></td>
-				<td><input type="text" placeholder="Price" required></td>
-				<td><input type="submit" value="Add"></td>
-			</tr>
+			<tbody id="productTable">
+				<tr class="entry"><td>ayy</td></tr>
+			</tbody>
 		</table>
 	</div>
 

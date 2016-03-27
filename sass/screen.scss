@@ -5,27 +5,25 @@ html {box-sizing: border-box; font-size: 1em; font-family: Lato; font-weight: 40
 *, *:before, *:after {box-sizing: inherit;}
 
 .flex-container {display: flex;
-	.box {height: 200px; line-height:178px; vertical-align: middle; text-align: center; background-color: #eee ; width: 100%; margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 2px;}
-	.panel {height: auto; line-height:3em; vertical-align: middle; text-align: center; background-color: #eee ; width: 100%; margin: 20px; padding: 10px; padding-top: 0; border: 1px solid #ccc; border-radius: 2px;}
+	.box {height: 200px; line-height:178px; vertical-align: middle; text-align: center; background-color: #eee ; width: 500px; margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 2px;}
+	.panel {height: auto; line-height:3em; vertical-align: middle; text-align: center; background-color: #eee; width: calc(100% - 40px); margin: 20px; padding: 15px; padding-top: 0; border: 1px solid #ccc; border-radius: 2px;}
 }
 
 #target {opacity: 0.5;}
 
-h3 {font-size: 16pt; line-height: 1em; padding: 0; border: 0;}
+h3 {font-size: 16pt; line-height: 1em; padding: 0; border: 0; text-align: center;}
 
 .warning {color: #F00; text-align: center;}
 
 .info {height: auto; line-height: 3em; vertical-align: middle; text-align: center; background-color: #eee; width: auto; margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 2px;}
 
-#list {height: auto; line-height: 2em; vertical-align: middle; text-align: center; background-color: #ddd; width: calc(100% - 40px); margin: 20px; padding: 0;
-	#productTable {width: 100%;}
-	tr {width: 100%; height: 2em; background-color: #eee; text-align: left; padding-left: 10px; padding-right: 10px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+table {
+	input {width: 100%;}
+	line-height: 2em; vertical-align: middle; text-align: center; margin: 20px; padding: 10px; border-collapse: collapse;
 	.label {font-size: 16pt; line-height: 3em; text-align: center;}
-}
-
-.productPanel {
-	width: 100%;
-	input {width: 100%}
+	tr {height: 2em; line-height: 1em; text-align: left; padding-left: 10px; padding-right: 10px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+	td {border: 1px solid #ccc; border-radius: 1px;}
+	th, td {padding: 5px;}
 }
 
 #errorbox {text-overflow: ellipsis; overflow: hidden;}
