@@ -2,8 +2,10 @@
 import json
 import time
 import cgi
-import cgitb
-cgitb.enable()
+
+# For debugging
+# import cgitb
+# cgitb.enable()
 
 # Print response header, mind the newline
 print("Content-type: text/plain\n")
@@ -35,12 +37,9 @@ try:
         print(json.dumps(products))
 
     if query == 'addProduct':
-        products.append(json.loads(form['p'].value))
+        p = json.loads(form['p'].value)
+        products.append(createProduct(p['PRODUCT']['NAME'], p['PRODUCT']['PRICE'], p['PRODUCT']['TEXTVAL1'], p['PRODUCT']['TEXTVAL2']))
         open('products.json', 'w').write(json.dumps(products, indent=4))
-
-        print(json.dumps(products))
-
-    open('out', 'a').write(form['query'].value)
 
 except Exception as e:
     print(str(e))

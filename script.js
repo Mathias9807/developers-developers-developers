@@ -81,6 +81,7 @@ function addProduct() {
 		if (request.readyState == 4) {
 			getProductList();
 		}
+		// document.getElementById("errorbox").innerHTML = request.responseText;
 	};
 
 	request.open("POST", "ajax.py", true);

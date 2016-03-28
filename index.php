@@ -10,18 +10,20 @@
 	<div id="errorbox"></div>
 
 	<div class="flex-container">
-		<div id="drag" class="box" draggable="true" ondragstart="dragStart(event)">
+		<div id="drag" class="panel tall" draggable="true" ondragstart="dragStart(event)">
 			Drag me
 		</div>
-		<div id="target" class="box" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<div id="target" class="panel tall" ondrop="drop(event)" ondragover="allowDrop(event)">
 			In here
 		</div>
 	</div>
 
 	<?php
 		// Enable error checking
-		error_reporting(E_ALL);
-		ini_set('display_errors', 1);
+		// error_reporting(E_ALL);
+		// ini_set('display_errors', 1);
+
+		session_start();
 
 		// True if the form has both username and password filled in
 		$formFilled = array_key_exists('name', $_POST) 
@@ -29,11 +31,8 @@
 				&& $_POST['name'] != ""
 				&& $_POST['pass'] != "";
 
-		$loggedIn = false;
-
 		// Check if name field is empty on log in or registration
-		if ((array_key_exists('register', $_GET) 
-				|| array_key_exists('login', $_GET)) 
+		if ((array_key_exists('register', $_GET) || array_key_exists('login', $_GET)) 
 				&& !$formFilled) {
 			echo '<div class="warning">Invalid username or password</div>';
 		}
@@ -41,7 +40,7 @@
 		if (array_key_exists('register', $_GET) && $formFilled) {
 
 			// Get username and hashed password
-			$name = $_POST['name'];
+			$_SESSION['name'] = $_POST['name'];
 			$pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
 			$db = new SQLite3('database.sqlite', SQLITE3_OPEN_READWRITE);
@@ -50,40 +49,41 @@
 				// Check if user exists
 				$exists = $db->query(
 					'SELECT * FROM USERS WHERE NAME = \'' .
-					SQLite3::escapeString($name) .
+					SQLite3::escapeString($_SESSION['name']) .
 					'\';'
 				);
 
 				if ($exists->fetchArray()) {
 					echo "<div class=\"warning\">The name '" . 
-						htmlspecialchars($name) . 
+						htmlspecialchars($_SESSION['name']) . 
 						"' is already taken!</div>";
 				}else {
 					// Else, add user to database
 					$query = 'INSERT INTO USERS (NAME, PASS) VALUES (\'' . 
-						SQLite3::escapeString($name) . '\', \'' . 
+						SQLite3::escapeString($_SESSION['name']) . '\', \'' . 
 						SQLite3::escapeString($pass) . '\');';
 
 					$db->query($query);
 
-					$loggedIn = true;
+					$_SESSION['loggedIn'] = true;
 				}
 			}else {
 				echo 'Connection to database failed!\n';
 			}
 		}else if (array_key_exists('login', $_GET) && $formFilled) {
-			$name = $_POST['name'];
+			$_SESSION['name'] = $_POST['name'];
 			$pass = $_POST['pass'];
 
 			$db = new SQLite3('database.sqlite', SQLITE3_OPEN_READWRITE);
 
 			if ($db) {
+				// Find the user in the database
 				$query = $db->query('SELECT * FROM USERS WHERE NAME = \'' .
-					SQLite3::escapeString($name) . '\';');
+					SQLite3::escapeString($_SESSION['name']) . '\';');
 	
 				if ($user = $query->fetchArray()) {
 					if (password_verify($pass, $user['PASS'])) {
-						$loggedIn = true;
+						$_SESSION['loggedIn'] = true;
 					}else {
 						echo '<div class="warning">Invalid username or password</div>';
 					}
@@ -93,20 +93,21 @@
 			}else {
 				echo 'Connection to database failed!\n';
 			}
+		}else if (array_key_exists('logout', $_GET)) {
+			$_SESSION['loggedIn'] = false;
+			$_SESSION['name'] = '';
 		}
 
-		if ($loggedIn) {
+		if ($_SESSION['loggedIn']) {
 			echo '<div class="info">' .
 				'<form action="index.php" method="get">' .
 				'You are logged in as \'' . 
-				htmlspecialchars($name) . '\' ' . 
-				'<input type="submit" value="Log out" />' .
+				htmlspecialchars($_SESSION['name']) . '\' ' . 
+				'<input type="submit" name="logout" value="Log out" />' .
 				'</form></div>';
 		}else {
 			echo file_get_contents('login.html');
 		}
-
-		echo file_get_contents('newProduct.html');
 	?>
 
 	<div id="list" class="flex-container">
@@ -121,8 +122,23 @@
 				<th>Price</th>
 			</tr>
 			<tbody id="productTable">
-				<tr class="entry"><td>ayy</td></tr>
 			</tbody>
+		</table>
+	</div>
+
+	<div class="flex-container">
+		<table class="panel">
+			<tr>
+				<th colspan="5" class="label">Add a new product</th>
+			</tr>
+	
+			<tr id="productForm">
+				<td><input type="text" placeholder="Name" required></td>
+				<td><input type="text" placeholder="Description" required></td>
+				<td><input type="text" placeholder="Maker" required></td>
+				<td><input type="text" placeholder="Price" required></td>
+				<td><input type="submit" value="Add" onclick="addProduct()"></td>
+			</tr>
 		</table>
 	</div>
 
