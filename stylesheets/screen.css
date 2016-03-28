@@ -17,19 +17,6 @@ html {
   display: flex;
 }
 /* line 8, ../sass/screen.scss */
-.flex-container .box {
-  height: 200px;
-  line-height: 178px;
-  vertical-align: middle;
-  text-align: center;
-  background-color: #eee;
-  width: 500px;
-  margin: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-}
-/* line 9, ../sass/screen.scss */
 .flex-container .panel {
   height: auto;
   line-height: 3em;
@@ -43,17 +30,17 @@ html {
   border: 1px solid #ccc;
   border-radius: 2px;
 }
-/* line 10, ../sass/screen.scss */
+/* line 9, ../sass/screen.scss */
 .flex-container .tall {
   line-height: 178px;
 }
 
-/* line 13, ../sass/screen.scss */
+/* line 12, ../sass/screen.scss */
 #target {
   opacity: 0.5;
 }
 
-/* line 15, ../sass/screen.scss */
+/* line 14, ../sass/screen.scss */
 h3 {
   font-size: 16pt;
   line-height: 1em;
@@ -62,13 +49,7 @@ h3 {
   text-align: center;
 }
 
-/* line 17, ../sass/screen.scss */
-.warning {
-  color: #F00;
-  text-align: center;
-}
-
-/* line 19, ../sass/screen.scss */
+/* line 16, ../sass/screen.scss */
 .info {
   height: auto;
   line-height: 3em;
@@ -82,7 +63,7 @@ h3 {
   border-radius: 2px;
 }
 
-/* line 21, ../sass/screen.scss */
+/* line 18, ../sass/screen.scss */
 table {
   line-height: 2em;
   vertical-align: middle;
@@ -91,17 +72,17 @@ table {
   padding: 10px;
   border-collapse: collapse;
 }
-/* line 22, ../sass/screen.scss */
+/* line 19, ../sass/screen.scss */
 table input {
   width: 100%;
 }
-/* line 24, ../sass/screen.scss */
+/* line 21, ../sass/screen.scss */
 table .label {
   font-size: 16pt;
   line-height: 3em;
   text-align: center;
 }
-/* line 25, ../sass/screen.scss */
+/* line 22, ../sass/screen.scss */
 table tr {
   height: 2em;
   line-height: 1em;
@@ -112,17 +93,23 @@ table tr {
   overflow: hidden;
   white-space: nowrap;
 }
-/* line 26, ../sass/screen.scss */
+/* line 23, ../sass/screen.scss */
 table td {
   border: 1px solid #ccc;
   border-radius: 1px;
 }
-/* line 27, ../sass/screen.scss */
+/* line 24, ../sass/screen.scss */
 table th, table td {
   padding: 5px;
 }
 
-/* line 30, ../sass/screen.scss */
+/* line 27, ../sass/screen.scss */
+.warning {
+  color: #F00;
+  text-align: center;
+}
+
+/* line 29, ../sass/screen.scss */
 #errorbox {
   text-overflow: ellipsis;
   overflow: hidden;
